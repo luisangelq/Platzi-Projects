@@ -1,13 +1,20 @@
 import react from "react";
+import styled from "styled-components";
 
-function TodoList(props){
-    return(
-        <section>
-            <ul>
-                {props.children}
-            </ul>
-        </section>
-    );
+function TodoList(props) {
+  return (
+    <List>
+      <ul>{props.children}</ul>
+    </List>
+  );
 }
 
-export { TodoList};
+const List = styled.section`
+  ul {
+    margin: 0;
+    padding: 0 0 56px 0;
+    list-style: none;
+  }
+`;
+
+export { TodoList };
