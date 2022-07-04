@@ -6,27 +6,35 @@ import { TodoItem } from "./components/TodoItem";
 import { CreateTodoButtom } from "./components/CreateTodoButton";
 
 //import './App.css';
-const todos = [
-  { text: "Cortar cebolla", completed: false },
-  { text: "Tormar el curso de intro a react", completed: true },
-  { text: "Llorar con la llorona", completed: false },
+const todo = [
+  { id: 1, text: "Cortar cebolla", completed: true},
+  { id: 2, text: "Tormar el curso de intro a react", completed: true },
+  { id: 3, text: "Llorar con la llorona", completed: false },
 ];
 function App() {
+  const [todoList, setTodoList] = useState(todo);
   const [search, setSearch] = useState("");
+  const [filteredTodos, setfilteredTodos] = useState([]);
+
+  const completedTodos = todoList.filter((todo) => todo.completed).length;
+  const totalTodos = todoList.length;
 
   return (
     <>
-      <TodoCounter />
-      <TodoSearch 
+      <TodoCounter totalTodos={totalTodos} completedTodos={completedTodos} />
+      <TodoSearch
+        todoList={todoList}
+        setfilteredTodos={setfilteredTodos}
         search={search}
         setSearch={setSearch}
       />
       <TodoList>
-        {todos.map((todo) => (
+        {filteredTodos.map((todo) => (
           <TodoItem
-            key={todo.text}
-            text={todo.text}
-            completed={todo.completed}
+            key={todo.id}
+            todoList={todoList}
+            setTodoList={setTodoList}
+            todo={todo}
           />
         ))}
       </TodoList>

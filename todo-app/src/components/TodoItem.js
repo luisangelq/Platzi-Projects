@@ -1,25 +1,51 @@
 import react from "react";
 import styled from "styled-components";
+import Swal from "sweetalert2";
+
+import { checkTodo, deleteTodo } from "../helpers/todoActions";
 
 function TodoItem(props) {
-  const onComplete = () => {
-    console.log(props.text + "Completed");
+  const { todoList, setTodoList, todo } = props;
+
+  const onCheck = () => {
+    const markedTodo = checkTodo(todoList, todo.id);
+    setTodoList(markedTodo);
   };
 
   const onDelete = () => {
-    console.log(props.text + "Deleted");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const deletedTodo = deleteTodo(todoList, todo.id);
+        setTodoList(deletedTodo);
+
+        Swal.fire({
+          icon: "success",
+          title: "Your task has been deleted",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
   };
 
   return (
     <Item>
       <span
-        className={`Icon Icon-check ${props.completed && "Icon-check--active"}`}
-        onClick={onComplete}
+        className={`Icon Icon-check ${todo.completed && "Icon-check--active"}`}
+        onClick={onCheck}
       >
         ✔
       </span>
-      <p className={`Description ${props.completed && "Completed"}`}>
-        {props.text}
+      <p className={`Description ${todo.completed && "Completed"}`}>
+        {todo.text}
       </p>
       <span className="Icon Icon-delete" onClick={onDelete}>
         X

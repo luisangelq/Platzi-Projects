@@ -1,9 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const TodoCounter = () => {
+const TodoCounter = ({totalTodos, completedTodos}) => {
   return (
-    <Progression>Has complentado 2 de 3 ToDos</Progression>
+    <Progression>
+      Has complentado { completedTodos } de { totalTodos } ToDos
+    </Progression>
   )
 }
 
