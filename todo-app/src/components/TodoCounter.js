@@ -1,7 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const TodoCounter = ({totalTodos, completedTodos}) => {
+const TodoCounter = ({todoList}) => {
+
+  const completedTodos = todoList.filter((todo) => todo.completed).length;
+  const totalTodos = todoList.length;
+
   return (
     <Progression>
       Has complentado { completedTodos } de { totalTodos } ToDos

@@ -1,27 +1,49 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 
-function TodoSearch({todoList, setfilteredTodos, search, setSearch }) {
-
+function TodoSearch({
+  todoList,
+  setfilteredTodos,
+  search,
+  setSearch,
+  setLoading,
+  setError,
+}) {
   useEffect(() => {
     if (search !== "") {
+      setLoading(true);
+      setError(null);
+
       const filterBySearch = todoList.filter((todo) =>
         todo.text.toLowerCase().includes(search.toLowerCase())
       );
-      setfilteredTodos(filterBySearch);
-    } else {
-      setfilteredTodos(todoList);
-    }
-  } , [todoList, search]);
 
+      setTimeout(() => {
+        setfilteredTodos(filterBySearch);
+        setLoading(false);
+
+        if (filterBySearch.length === 0) {
+          setError("No se encontraron resultados");
+        }
+      }, 500);
+    } else {
+      setLoading(true);
+      setError(null);
+
+      setTimeout(() => {
+        setfilteredTodos(todoList);
+
+        if (todoList.length === 0) {
+          setError("There are no todos");
+        } 
+        setLoading(false);
+      }, 500);
+    }
+  }, [todoList, search]);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
-
-    
   };
-
-
 
   return (
     <SearchInput placeholder="Cebolla" value={search} onChange={handleSearch} />
