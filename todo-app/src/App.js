@@ -7,11 +7,11 @@ import { TodoItem } from "./components/TodoItem";
 import { CreateTodoButtom } from "./components/CreateTodoButton";
 
 import { TodoContext } from "./context";
-import Modal from "./helpers/modal";
+import Modal from "./helpers/modalPortal";
 
 function App() {
   //consume the context
-  const { filteredTodos, loading, error } = useContext(TodoContext);
+  const { filteredTodos, loading, error, openModal } = useContext(TodoContext);
 
   return (
     <>
@@ -39,9 +39,11 @@ function App() {
 
       {error ? <p>{error}</p> : null}
 
-      <Modal>
-        <p>Teleport</p>
-      </Modal>
+      {openModal ? (
+        <Modal>
+          <p>Teleport</p>
+        </Modal>
+      ) : null}
 
       <CreateTodoButtom />
     </>

@@ -20,6 +20,8 @@ const TodoProvider = ({ children }) => {
   const [loading, setLoading] = useState(null);
   const [error, setError] = useState(null);
 
+  const [openModal, setOpenModal] = useState(false);
+
   useEffect(() => {
     localStorage.setItem("todoList", JSON.stringify(todoList));
 
@@ -30,7 +32,7 @@ const TodoProvider = ({ children }) => {
       setError("There are no todos");
     }
     setfilteredTodos(todoList);
-    
+
     setLoading(false);
   }, [todoList]);
 
@@ -47,6 +49,8 @@ const TodoProvider = ({ children }) => {
         setLoading,
         error,
         setError,
+        openModal,
+        setOpenModal,
       }}
     >
       {children}

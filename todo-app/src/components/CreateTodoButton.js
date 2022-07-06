@@ -1,10 +1,14 @@
-import react from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 
-function CreateTodoButtom(props){
+import { TodoContext } from "../context";
+
+function CreateTodoButtom(){
+    const { openModal, setOpenModal } = useContext(TodoContext);
 
     const handleAddTodo = () => {
         console.log("Add todo");
+        setOpenModal(!openModal);
     }
     return(
         <AddTodo
@@ -22,7 +26,7 @@ const AddTodo = styled.button`
   font-size: 50px;
   position: fixed;
   bottom: 24px;
-  right: 50%;
+  right: 47%;
   font-weight: bold;
   color: #FAFAFA;
   display: flex;
@@ -30,6 +34,7 @@ const AddTodo = styled.button`
   align-items: center;
   height: 64px;
   width: 64px;
+  z-index: 100;
 
   transform: rotate(0);
   transition: .3s ease;
