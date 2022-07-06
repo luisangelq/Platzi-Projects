@@ -1,14 +1,18 @@
-import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
 import styled from "styled-components";
 
-function TodoSearch({
-  todoList,
-  setfilteredTodos,
-  search,
-  setSearch,
-  setLoading,
-  setError,
-}) {
+import { TodoContext } from "../context";
+
+function TodoSearch() {
+  const {
+    todoList,
+    setfilteredTodos,
+    search,
+    setSearch,
+    setLoading,
+    setError,
+  } = useContext(TodoContext);
+
   useEffect(() => {
     if (search !== "") {
       setLoading(true);
@@ -26,20 +30,8 @@ function TodoSearch({
           setError("No se encontraron resultados");
         }
       }, 500);
-    } else {
-      setLoading(true);
-      setError(null);
-
-      setTimeout(() => {
-        setfilteredTodos(todoList);
-
-        if (todoList.length === 0) {
-          setError("There are no todos");
-        } 
-        setLoading(false);
-      }, 500);
     }
-  }, [todoList, search]);
+  }, [search]);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
