@@ -1,20 +1,50 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
+import Swal from "sweetalert2";
+
+import { TodoContext } from "../context";
 
 const ModalForm = () => {
+  const [title, setTitle] = useState("");
+
+  const {todoList, setTodoList, setOpenModal } = useContext(TodoContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newTodo = {
+      id: Date.now(),
+      text: title,
+      completed: false,
+    };
+
+    const newTodoList = [ newTodo, ...todoList];
+    setTodoList(newTodoList);
+
+    setOpenModal(false);
+    setTitle("");
+
+    Swal.fire({
+      icon: "success",
+      title: "Your task has been added",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
+
   return (
-    <form onSubmit={onSubmit}>
+    <FormContainer onSubmit={handleSubmit}>
       <label>Escribe tu nuevo TODO</label>
-      <textarea
-        value={newTodoValue}
-        onChange={onChange}
-        placeholder="Cortar la cebolla para el almuerzo"
+      <input
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Cortar la cebolla"
       />
       <div className="TodoForm-buttonContainer">
         <button
           type="button"
           className="TodoForm-button TodoForm-button--cancel"
-          onClick={onCancel}
+          onClick={() => setOpenModal(false)}
         >
           Cancelar
         </button>
@@ -22,11 +52,11 @@ const ModalForm = () => {
           Añadir
         </button>
       </div>
-    </form>
+    </FormContainer>
   );
 };
 
-const FormContainer = styled.div`
+const FormContainer = styled.form`
   width: 90%;
   max-width: 300px;
   background-color: #fff;
@@ -35,6 +65,7 @@ const FormContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  border-radius: 10px;
 
   label {
     text-align: center;
@@ -44,7 +75,7 @@ const FormContainer = styled.div`
     margin-bottom: 26px;
   }
 
-  textarea {
+  input {
     background-color: #f9fbfc;
     border: 2px solid #202329;
     border-radius: 2px;
@@ -83,7 +114,7 @@ const FormContainer = styled.div`
     font-weight: 400;
     width: 120px;
     height: 48px;
-    border-radius: 2px;
+    border-radius: 5px;
     border: none;
     font-family: "Montserrat";
   }

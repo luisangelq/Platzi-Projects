@@ -5,6 +5,7 @@ import { TodoSearch } from "./components/TodoSearch";
 import { TodoList } from "./components/TodoList";
 import { TodoItem } from "./components/TodoItem";
 import { CreateTodoButtom } from "./components/CreateTodoButton";
+import ModalForm from "./components/ModalForm";
 
 import { TodoContext } from "./context";
 import Modal from "./helpers/modalPortal";
@@ -41,7 +42,7 @@ function App() {
 
       {openModal ? (
         <Modal>
-          <p>Teleport</p>
+          <ModalForm />
         </Modal>
       ) : null}
 
