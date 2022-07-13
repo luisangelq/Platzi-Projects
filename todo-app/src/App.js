@@ -1,5 +1,5 @@
-import { useContext } from "react";
 import Spinner from "./components/Spinner";
+import { TodoHeader } from "./components/TodoHeader";
 import { TodoCounter } from "./components/TodoCounter";
 import { TodoSearch } from "./components/TodoSearch";
 import { TodoList } from "./components/TodoList";
@@ -7,22 +7,51 @@ import { TodoItem } from "./components/TodoItem";
 import { CreateTodoButtom } from "./components/CreateTodoButton";
 import ModalForm from "./components/ModalForm";
 
-import { TodoContext } from "./context";
+import { useTodos } from "./hooks";
 import Modal from "./helpers/modalPortal";
 
 function App() {
   //consume the context
-  const { filteredTodos, loading, error, openModal } = useContext(TodoContext);
+  const {
+    todoList,
+    setTodoList,
+    search,
+    setSearch,
+    filteredTodos,
+    setfilteredTodos,
+    loading,
+    setLoading,
+    error,
+    setError,
+    openModal,
+    setOpenModal,
+  } = useTodos();
 
   return (
     <>
-      <TodoCounter />
-      <TodoSearch />
+      <TodoHeader loading={loading}>
+        <TodoCounter todoList={todoList} />
+        <TodoSearch
+          todoList={todoList}
+          filteredTodos={filteredTodos}
+          setfilteredTodos={setfilteredTodos}
+          search={search}
+          setSearch={setSearch}
+          setLoading={setLoading}
+          setError={setError}
+        />
+      </TodoHeader>
 
       {!loading ? (
         <TodoList>
           {filteredTodos.map((todo) => (
-            <TodoItem key={todo.id} todo={todo} />
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              todoList={todoList}
+              setTodoList={setTodoList}
+              setLoading={setLoading}
+            />
           ))}
         </TodoList>
       ) : (
@@ -38,15 +67,19 @@ function App() {
         </div>
       )}
 
-      {error ? <p>{error}</p> : null}
+      {error && <p>{error}</p>}
 
-      {openModal ? (
+      <CreateTodoButtom setOpenModal={setOpenModal} openModal={openModal} />
+
+      {openModal && (
         <Modal>
-          <ModalForm />
+          <ModalForm
+            todoList={todoList}
+            setTodoList={setTodoList}
+            setOpenModal={setOpenModal}
+          />
         </Modal>
-      ) : null}
-
-      <CreateTodoButtom />
+      )}
     </>
   );
 }

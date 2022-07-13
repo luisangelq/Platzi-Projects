@@ -1,13 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 
-import { TodoContext } from "../context";
 
-const ModalForm = () => {
+const ModalForm = ({todoList, setTodoList, setOpenModal}) => {
   const [title, setTitle] = useState("");
-
-  const {todoList, setTodoList, setOpenModal } = useContext(TodoContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();

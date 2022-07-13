@@ -1,13 +1,9 @@
-import { useContext } from "react";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 
 import { checkTodo, deleteTodo } from "../helpers/todoActions";
 
-import { TodoContext } from "../context";
-
-function TodoItem({ todo }) {
-  const { todoList, setTodoList, setLoading } = useContext(TodoContext);
+function TodoItem({ todo, todoList, setTodoList, setLoading }) {
 
   const onCheck = () => {
     

@@ -1,14 +1,6 @@
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect } from "react";
 
-const TodoContext = createContext();
-
-const todo = [
-  { id: 1, text: "Cortar cebolla", completed: true },
-  { id: 2, text: "Tormar el curso de intro a react", completed: true },
-  { id: 3, text: "Llorar con la llorona", completed: false },
-];
-
-const TodoProvider = ({ children }) => {
+const useTodos = () => {
   // localStorage.setItem("todoList", JSON.stringify(todo));
   const getTodoList = localStorage.getItem("todoList");
 
@@ -28,34 +20,30 @@ const TodoProvider = ({ children }) => {
     setLoading(true);
     setError(null);
 
+    setTimeout(() => {
     if (todoList.length === 0) {
       setError("There are no todos");
     }
     setfilteredTodos(todoList);
 
     setLoading(false);
+    }, 1500);
   }, [todoList]);
 
-  return (
-    <TodoContext.Provider
-      value={{
-        todoList,
-        setTodoList,
-        search,
-        setSearch,
-        filteredTodos,
-        setfilteredTodos,
-        loading,
-        setLoading,
-        error,
-        setError,
-        openModal,
-        setOpenModal,
-      }}
-    >
-      {children}
-    </TodoContext.Provider>
-  );
+  return {
+    todoList,
+    setTodoList,
+    search,
+    setSearch,
+    filteredTodos,
+    setfilteredTodos,
+    loading,
+    setLoading,
+    error,
+    setError,
+    openModal,
+    setOpenModal,
+  };
 };
 
-export { TodoContext, TodoProvider };
+export { useTodos };

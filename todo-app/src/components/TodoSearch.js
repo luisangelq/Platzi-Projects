@@ -1,35 +1,33 @@
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 
-import { TodoContext } from "../context";
-
-function TodoSearch() {
-  const {
-    todoList,
-    setfilteredTodos,
-    search,
-    setSearch,
-    setLoading,
-    setError,
-  } = useContext(TodoContext);
-
+function TodoSearch({
+  todoList,
+  filteredTodos,
+  setfilteredTodos,
+  search,
+  setSearch,
+  loading,
+  setError,
+}) {
   useEffect(() => {
+    console.log(filteredTodos);
     if (search !== "") {
-      setLoading(true);
       setError(null);
 
       const filterBySearch = todoList.filter((todo) =>
         todo.text.toLowerCase().includes(search.toLowerCase())
       );
 
-      setTimeout(() => {
-        setfilteredTodos(filterBySearch);
-        setLoading(false);
+      setfilteredTodos(filterBySearch);
 
-        if (filterBySearch.length === 0) {
-          setError("No se encontraron resultados");
-        }
-      }, 500);
+      if (filterBySearch.length === 0) {
+        setError("No se encontraron resultados");
+      }
+    } else {
+      setfilteredTodos(todoList);
+      setError(null);
+      console.log(filteredTodos);
     }
   }, [search]);
 
@@ -38,7 +36,12 @@ function TodoSearch() {
   };
 
   return (
-    <SearchInput placeholder="Cebolla" value={search} onChange={handleSearch} />
+    <SearchInput
+      placeholder="Cebolla"
+      value={search}
+      onChange={handleSearch}
+      disabled={loading}
+    />
   );
 }
 
@@ -64,6 +67,11 @@ const SearchInput = styled.input`
 
   &:focus {
     outline-color: #61dafa;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 `;
 

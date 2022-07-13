@@ -1,24 +1,15 @@
-import { useContext } from "react";
 import styled from "styled-components";
 
-import { TodoContext } from "../context";
-
-function CreateTodoButtom(){
-    const { openModal, setOpenModal } = useContext(TodoContext);
-
-    const handleAddTodo = () => {
-        console.log("Add todo");
-        setOpenModal(!openModal);
-    }
-    return(
-        <AddTodo
-            onClick={handleAddTodo}
-        >+</AddTodo>
-    );
+function CreateTodoButtom({ openModal, setOpenModal }) {
+  const handleAddTodo = () => {
+    console.log("Add todo");
+    setOpenModal(!openModal);
+  };
+  return <AddTodo onClick={handleAddTodo}>+</AddTodo>;
 }
 
 const AddTodo = styled.button`
-    background-color: #61DAFA;
+  background-color: #61dafa;
   box-shadow: 0px 5px 25px rgba(97, 218, 250, 0.5);
   border: none;
   border-radius: 50%;
@@ -28,7 +19,7 @@ const AddTodo = styled.button`
   bottom: 24px;
   right: 47%;
   font-weight: bold;
-  color: #FAFAFA;
+  color: #fafafa;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,12 +28,11 @@ const AddTodo = styled.button`
   z-index: 100;
 
   transform: rotate(0);
-  transition: .3s ease;
+  transition: 0.3s ease;
 
   &:hover {
     transform: rotate(224deg);
-    }
-`
+  }
+`;
 
-
-export { CreateTodoButtom};
+export { CreateTodoButtom };
