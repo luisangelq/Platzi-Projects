@@ -27,7 +27,7 @@ function TodoSearch({
     } else {
       setfilteredTodos(todoList);
       setError(null);
-      console.log(filteredTodos);
+    
     }
   }, [search]);
 

@@ -20,15 +20,21 @@ const useTodos = () => {
     setLoading(true);
     setError(null);
 
-    setTimeout(() => {
     if (todoList.length === 0) {
       setError("There are no todos");
     }
     setfilteredTodos(todoList);
 
     setLoading(false);
-    }, 1500);
+    console.log("test");
   }, [todoList]);
+
+  //Listen for changes in other tabs or windows and apply changes
+  window.addEventListener("storage", (e) => {
+    if (e.key === "todoList") {
+      setTodoList(JSON.parse(e.newValue));
+    }
+  });
 
   return {
     todoList,
