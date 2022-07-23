@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "alias": ["petgram-server-luis"],
+  "alias": ["petgram-api-server-luis"],
   "builds": [{ "src": "index.js", "use": "@vercel/node" }],
   "routes": [{
     "headers": {
