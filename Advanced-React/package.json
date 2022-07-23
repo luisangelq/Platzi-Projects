@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
+    "versel-build": "npm run build",
     "lint": "standard",
     "dev": "webpack-dev-server --config webpack.config.js --mode development",
     "deploy": "now -t <tu-token>",
@@ -25,6 +26,7 @@
     "lowdb": "3.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.4.0",
     "styled-components": "^5.3.5",
     "uuid": "8.3.2"
   },
