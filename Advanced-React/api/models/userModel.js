@@ -1,6 +1,5 @@
 const db = require('../adapter')
 const crypto = require('crypto')
-const uuidv1 = require('uuid/v1')
 const bcrypt = require('bcrypt')
 
 
@@ -24,7 +23,7 @@ async function create ({ email, password }) {
 
   // Create a user
   const user = {
-    id: uuidv1(), // with a unique user id
+    id: Math.random() , // with a unique user id
     password: await bcrypt.hash(password, 10), // with the encrypted password
     favs: [],
     avatar,
