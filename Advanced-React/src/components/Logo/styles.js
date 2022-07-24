@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const SvgWapper = styled.div`
     display: flex;
@@ -8,4 +8,4 @@ const SvgWapper = styled.div`
     }
 `
 
-export { SvgWapper };
+export { SvgWapper }

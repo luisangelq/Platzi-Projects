@@ -1,7 +1,7 @@
-import React from "react";
-import { PhotoCard } from "../PhotoCard";
+import React from 'react'
+import { PhotoCard } from '../PhotoCard'
 
-import photoCards from "../../../api/db.json";
+import photoCards from '../../../api/db.json'
 
 const ListOfPhotoCard = () => {
   return (
@@ -12,7 +12,7 @@ const ListOfPhotoCard = () => {
         </li>
       ))}
     </ul>
-  );
-};
+  )
+}
 
-export { ListOfPhotoCard };
+export { ListOfPhotoCard }

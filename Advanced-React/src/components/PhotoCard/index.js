@@ -1,14 +1,14 @@
-import React from "react";
-import { MdFavoriteBorder } from "react-icons/md";
+import React from 'react'
+import { MdFavoriteBorder } from 'react-icons/md'
 
-import { ImgWrapper, Img, Button } from "./styles";
+import { ImgWrapper, Img, Button } from './styles'
 
 const PhotoCard = ({ id, likes = 0, src }) => {
   return (
     <article>
       <a href={`/detail/${id}`}>
         <ImgWrapper>
-          <Img src={src} alt="" />
+          <Img src={src} alt='' />
         </ImgWrapper>
       </a>
 
@@ -17,7 +17,7 @@ const PhotoCard = ({ id, likes = 0, src }) => {
         {likes} likes!
       </Button>
     </article>
-  );
-};
+  )
+}
 
-export { PhotoCard };
+export { PhotoCard }
