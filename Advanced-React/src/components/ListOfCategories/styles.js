@@ -16,7 +16,7 @@ const List = styled.ul`
     padding: 5px;
     position: fixed;
     right: 0;
-    top: -20;
+    top: 10px;
     transform: scale(.8);
     z-index: 1;
   }

@@ -4,6 +4,7 @@ import { PhotoCard } from '../PhotoCard'
 import photoCards from '../../../api/db.json'
 
 const ListOfPhotoCard = () => {
+  console.log(photoCards);
   return (
     <ul>
       {photoCards.photos.map((photo) => (

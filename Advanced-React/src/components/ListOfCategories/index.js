@@ -3,24 +3,15 @@ import React, { useState, useEffect } from "react";
 import { Category } from "../Category";
 import { List } from "./styles";
 
+import { onScrollForCategories } from "../../helpers/onScrollForCategories";
+import { useFetch } from "../../hooks/useApi";
+
 const ListOfCategories = () => {
-  const [categories, setCategories] = useState([]);
+  const { categories } = useFetch("categories");
   const [fixedCategory, setFixedCategory] = useState(true);
 
-  const URL = "https://petgram-server-luis-f5pu4hs2i-luisangelq.vercel.app";
-
   useEffect(() => {
-    try {
-      const fetchCategories = async () => {
-        const response = await fetch(`${URL}/categories`);
-        const data = await response.json();
-        setCategories(data);
-      };
-
-      fetchCategories();
-    } catch (error) {
-      console.log(error);
-    }
+    onScrollForCategories(setFixedCategory);
   }, []);
 
   return (
