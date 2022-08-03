@@ -3,17 +3,14 @@ import React, { useState, useEffect } from "react";
 import { Category } from "../Category";
 import { List } from "./styles";
 
-import { onScrollForCategories } from "../../helpers/onScrollForCategories";
+
 import { useFetch } from "../../hooks/useApi";
+import { useScroll } from "../../hooks/useScroll";
 
 const ListOfCategories = () => {
   const { categories } = useFetch("categories");
-  const [fixedCategory, setFixedCategory] = useState(true);
-
-  useEffect(() => {
-    onScrollForCategories(setFixedCategory);
-  }, []);
-
+  const { fixedCategory } = useScroll();
+  
   return (
     <List className={fixedCategory ? "fixed" : null}>
       {categories?.map((category) => (
