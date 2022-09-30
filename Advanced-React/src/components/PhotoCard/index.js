@@ -6,7 +6,27 @@ import { Article, ImgWrapper, Img, Button } from "./styles";
 import { useScrollIntersection } from "../../hooks/useScroll";
 
 const PhotoCard = ({ id, likes = 0, src }) => {
-  const [liked, setLiked] = useState(false);
+  const key = `like-${id}`
+  const [liked, setLiked] = useState(() => {
+    try {
+      const like = window.localStorage.getItem(key);
+      return like;
+    } catch (error) {
+      console.log(error); 
+      return false
+    }
+  });
+
+  console.log(liked);
+
+  const setLocalStrorage = (value) => {
+    try {
+      window.localStorage.setItem(key, value);
+      setLiked(value);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const element = useRef(null);
   const { show } = useScrollIntersection(element);
@@ -21,7 +41,8 @@ const PhotoCard = ({ id, likes = 0, src }) => {
             </ImgWrapper>
           </a>
 
-          <Button onClick={() => setLiked(!liked)}>
+          <Button onClick={() => setLocalStrorage(!liked)}>
+
             {liked ? (
               <MdFavorite style={{ color: "#ED4956" }} />
             ) : (
