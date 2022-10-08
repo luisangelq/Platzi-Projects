@@ -1,5 +1,5 @@
+import {Col} from "antd"
 import './App.css';
-
 import Searcher from './components/Searcher';
 
 function App() {
